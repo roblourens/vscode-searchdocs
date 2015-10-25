@@ -2,11 +2,11 @@ import * as vscode from 'vscode';
 var open = require('open');
 
 export function activate() { 
-	vscode.commands.registerCommand('extension.searchSO', () => {
-		getQueryAndSearch('http://stackoverflow.com/search?q=%s', 'StackOverflow');
+	vscode.commands.registerCommand('searchdocs.searchSO', () => {
+		getQueryAndSearch('http://stackoverflow.com/search?q=%s', 'Stack Overflow');
 	});
 	
-	vscode.commands.registerCommand('extension.searchMDN', () => {
+	vscode.commands.registerCommand('searchdocs.searchMDN', () => {
 		getQueryAndSearch('https://developer.mozilla.org/en-US/search?q=%s', 'MDN');
 	});
 	

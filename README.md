@@ -1,14 +1,5 @@
-# README
-## This is the README for your extension "vsc-searchdocs" 
+## vsc-searchdocs 
 -------------------
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+Quickly search Stack Overflow or MDN, from VS Code, in your default browser.
 
-* Split the editor (`Cmd+\` on OSX or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on OSX or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (OSX) to see a list of Markdown snippets
-
-### For more information
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-** Enjoy!**
+searchdocs adds two commands which you can find in the command palette, or with the keybindings `ctrl+alt+shift+s` and `ctrl+alt+shift+m`. If you have selected text, searchdocs will immediately open your default browser to the search results. If you don't have a selection, it will open an input box for your query. You can change this behavior with the `searchdocs.searchWordUnderCursor` setting. If true, it will search for the word under the cursor, when you don't have selected text.
