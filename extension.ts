@@ -3,41 +3,28 @@ var open = require('open');
 
 export function activate() { 
 	vscode.commands.registerCommand('extension.searchSO', () => {
-		showSearchDialogForSelectedText('http://stackoverflow.com/search?q=%s');
+		getQueryAndSearch('http://stackoverflow.com/search?q=%s', 'StackOverflow');
 	});
 	
 	vscode.commands.registerCommand('extension.searchMDN', () => {
-		showSearchDialogForSelectedText('https://developer.mozilla.org/en-US/search?q=%s');
+		getQueryAndSearch('https://developer.mozilla.org/en-US/search?q=%s', 'MDN');
 	});
 	
-	function showSearchDialogForSelectedText(searchUrl: string): void {
+	function getQueryAndSearch(searchUrl: string, providerName: string): void {
 		const editor = vscode.window.getActiveTextEditor();
 		if (!editor) return;
 		
 		const selection = editor.getSelection();
-		let suggestedSearchText: string;
+		let searchTextP: Thenable<string>;
 		if (selection.isEmpty()) {
-			const cursorWordRange = editor.getTextDocument().getWordRangeAtPosition(selection.start);
-			suggestedSearchText = cursorWordRange ?
-				editor.getTextDocument().getTextInRange(cursorWordRange) :
-				'';
+			searchTextP = vscode.window.showInputBox({ prompt: `${providerName}: Enter your query` });
 		} else {
-			suggestedSearchText = editor.getTextDocument().getTextInRange(new vscode.Range(selection.anchor, selection.active));
+			searchTextP = Promise.resolve(editor.getTextDocument().getTextInRange(new vscode.Range(selection.anchor, selection.active)));
 		}
 		
-		showSearchDialog(searchUrl, suggestedSearchText);
-	}
-	
-	function showSearchDialog(searchUrl: string, suggestedText?: string): void {
-		const prompt = suggestedText ?
-			`Press enter to search for ${suggestedText}, or enter your query`:
-			'Enter your query';
-		vscode.window.showInputBox({ placeHolder: suggestedText, prompt }).then(result => {
-			const searchText = result || suggestedText;
+		searchTextP.then(searchText => {
 			if (searchText) {
-				searchUrl = searchUrl.replace('%s', encodeURIComponent(searchText));
-				open(searchUrl);
-				//vscode.window.showInformationMessage(`open(${searchUrl})`);
+				open(searchUrl.replace('%s', encodeURIComponent(searchText)));
 			}
 		});
 	}
