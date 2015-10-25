@@ -1,7 +1,7 @@
 {
-    "name": "vsc-searchdocs",
+    "name": "searchdocs",
     "description": "Quickly search StackOverflow or MDN, from VS Code, in your default browser",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "roblourens",
     "engines": {
         "vscode": "*"
@@ -14,7 +14,7 @@
     "contributes": {
         "commands": [{
                 "command": "searchdocs.searchSO",
-                "title": "Search StackOverflow"
+                "title": "Search Stack Overflow"
             },
             {
                 "command": "searchdocs.searchMDN",
