@@ -18,7 +18,9 @@ export function activate() {
 		let suggestedSearchText: string;
 		if (selection.isEmpty()) {
 			const cursorWordRange = editor.getTextDocument().getWordRangeAtPosition(selection.start);
-			suggestedSearchText = editor.getTextDocument().getTextInRange(cursorWordRange);
+			suggestedSearchText = cursorWordRange ?
+				editor.getTextDocument().getTextInRange(cursorWordRange) :
+				'';
 		} else {
 			suggestedSearchText = editor.getTextDocument().getTextInRange(new vscode.Range(selection.anchor, selection.active));
 		}
