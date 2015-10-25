@@ -1,37 +1,48 @@
 {
-  "name": "vsc-searchdocs",
-  "description": "Quickly search StackOverflow or MDN, from VS Code, in your default browser",
-  "version": "0.0.1",
-  "publisher": "roblourens",
-  "engines": {
-    "vscode": "*"
-  },
-  "activationEvents": [
-    "command:extension.searchSO",
-    "command:extension.searchMDN"
-  ],
-  "main": "./out/extension",
-  "contributes": {
-    "commands": [
-      {
-        "command": "extension.searchSO",
-        "title": "Search StackOverflow"
-      },
-      {
-        "command": "extension.searchMDN",
-        "title": "Search MDN"
-      }
-    ]
-  },
-  "scripts": {
-    "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
-    "compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
-  },
-  "devDependencies": {
-    "tsd": "^0.6.5",
-    "vscode": "*"
-  },
-  "dependencies": {
-    "open": "0.0.5"
-  }
+    "name": "vsc-searchdocs",
+    "description": "Quickly search StackOverflow or MDN, from VS Code, in your default browser",
+    "version": "0.0.1",
+    "publisher": "roblourens",
+    "engines": {
+        "vscode": "*"
+    },
+    "activationEvents": [
+        "command:extension.searchSO",
+        "command:extension.searchMDN"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.searchSO",
+                "title": "Search StackOverflow"
+            },
+            {
+                "command": "extension.searchMDN",
+                "title": "Search MDN"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "searchdocs configuration",
+            "properties": {
+                "searchdocs.searchWordUnderCursor": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "When there's no selection, search for the word under the cursor, instead of showing an input box."
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
+    },
+    "devDependencies": {
+        "tsd": "^0.6.5",
+        "vscode": "*"
+    },
+    "dependencies": {
+        "open": "0.0.5"
+    }
 }
