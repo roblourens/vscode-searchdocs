@@ -19,30 +19,30 @@ export function activate() {
 	}
 	
 	function getQuery(searchUrl: string, providerName: string): Thenable<string> {
-		const editor = vscode.window.getActiveTextEditor();
+		const editor = vscode.window.activeTextEditor;
 		if (!editor) return Promise.resolve(null);
 		
-		return vscode.extensions.getConfigurationMemento('searchdocs').getValue('searchWordUnderCursor', false).then(searchWordUnderCursor => {
-			const selection = editor.getSelection();
-			if (searchWordUnderCursor || !selection.isEmpty()) {
-				let searchText = getSelectedTextOrCursorWord(editor).trim();
-				if (searchText) return searchText;
-			}
+		const searchWordUnderCursor = vscode.workspace.getConfiguration('searchdocs')['searchWordUnderCursor'];
+		const selection = editor.selection;
+		if (searchWordUnderCursor || !selection.isEmpty) {
+			let searchText = getSelectedTextOrCursorWord(editor).trim();
+			if (searchText) return Promise.resolve(searchText.trim());
+		}
 			
-			return vscode.window.showInputBox({ prompt: `${providerName}: Enter your query` });
-		}).then(searchText => searchText && searchText.trim());	
+		return vscode.window.showInputBox({ prompt: `${providerName}: Enter your query` })
+			.then(searchText => searchText && searchText.trim());	
 	}
 	
 	function getSelectedTextOrCursorWord(editor: vscode.TextEditor): string {
-		const selection = editor.getSelection();
-		const doc = editor.getTextDocument();
-		if (selection.isEmpty()) {
+		const selection = editor.selection;
+		const doc = editor.document;
+		if (selection.isEmpty) {
 			const cursorWordRange = doc.getWordRangeAtPosition(selection.active);
 			return cursorWordRange ?
-				doc.getTextInRange(cursorWordRange) :
+				doc.getText(cursorWordRange) :
 				'';
 		} else {
-			return doc.getTextInRange(selection);
+			return doc.getText(selection);
 		}
 	}
 }

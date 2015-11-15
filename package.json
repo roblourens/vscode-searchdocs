@@ -1,59 +1,66 @@
 {
-    "name": "searchdocs",
-    "description": "Quickly search StackOverflow or MDN, from VS Code, in your default browser",
-    "version": "0.0.2",
-    "publisher": "roblourens",
-    "engines": {
-        "vscode": "*"
-    },
-    "activationEvents": [
-        "command:searchdocs.searchSO",
-        "command:searchdocs.searchMDN"
+  "name": "searchdocs",
+  "description": "Quickly search StackOverflow or MDN, from VS Code, in your default browser",
+  "version": "0.0.2",
+  "publisher": "roblourens",
+  "engines": {
+    "vscode": "0.10.x"
+  },
+  "repository": {
+    "git": "https://github.com/roblourens/vscode-searchdocs"
+  },
+  "activationEvents": [
+    "onCommand:searchdocs.searchSO",
+    "onCommand:searchdocs.searchMDN"
+  ],
+  "main": "./out/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "searchdocs.searchSO",
+        "title": "Search Stack Overflow"
+      },
+      {
+        "command": "searchdocs.searchMDN",
+        "title": "Search MDN"
+      }
     ],
-    "main": "./out/extension",
-    "contributes": {
-        "commands": [{
-                "command": "searchdocs.searchSO",
-                "title": "Search Stack Overflow"
-            },
-            {
-                "command": "searchdocs.searchMDN",
-                "title": "Search MDN"
-            }
-        ],
-        "configuration": {
-            "type": "object",
-            "title": "searchdocs configuration",
-            "properties": {
-                "searchdocs.searchWordUnderCursor": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "When there's no selection, search for the word under the cursor, instead of showing an input box."
-                }
-            }
-        },
-        "keybindings": [{
-            "command": "searchdocs.searchSO",
-            "key": "ctrl+alt+shift+s",
-            "mac": "cmd+alt+shift+s",
-            "when": "editorTextFocus"
-        },
-        {
-            "command": "searchdocs.searchMDN",
-            "key": "ctrl+alt+shift+m",
-            "mac": "cmd+alt+shift+m",
-            "when": "editorTextFocus"
-        }]
+    "configuration": {
+      "type": "object",
+      "title": "searchdocs configuration",
+      "properties": {
+        "searchdocs.searchWordUnderCursor": {
+          "type": "boolean",
+          "default": false,
+          "description": "When there's no selection, search for the word under the cursor, instead of showing an input box."
+        }
+      }
     },
-    "scripts": {
-        "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
-        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
-    },
-    "devDependencies": {
-        "tsd": "^0.6.5",
-        "vscode": "*"
-    },
-    "dependencies": {
-        "open": "0.0.5"
-    }
+    "keybindings": [
+      {
+        "command": "searchdocs.searchSO",
+        "key": "ctrl+alt+shift+s",
+        "mac": "cmd+alt+shift+s",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "searchdocs.searchMDN",
+        "key": "ctrl+alt+shift+m",
+        "mac": "cmd+alt+shift+m",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+    "compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
+  },
+  "devDependencies": {
+    "tsd": "^0.6.5",
+    "vscode": "*"
+  },
+  "dependencies": {
+    "open": "0.0.5",
+    "vscode": "*"
+  }
 }
