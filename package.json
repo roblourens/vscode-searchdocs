@@ -1,7 +1,7 @@
 {
   "name": "searchdocs",
   "description": "Quickly search StackOverflow or MDN, from VS Code, in your default browser",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "roblourens",
   "engines": {
     "vscode": "0.10.x"
